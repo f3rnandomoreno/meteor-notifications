@@ -9,6 +9,7 @@ kahonNotification = {}
 */
 kahonNotification.create = function(users_id,title,message,url,other){
 
+    console.log("users_id:" + users_id)
     // object to insert to database
     var notification = {}
     
@@ -37,6 +38,13 @@ kahonNotification.create = function(users_id,title,message,url,other){
     
 }
 
+kahonNotification.close = function(query){
+    debug("query:" + JSON.stringify(query))
+    Notifications.update(query,{$set:{closed:true}},{ multi: true },function(error,nums){
+        debug("error:" + error)
+        debug("nums:" + nums)
+    })
+}
 
 Meteor.methods({
     close: function(notification_id){

@@ -14,12 +14,10 @@ Template.kahon_notifications.helpers({
 
 Template.kahon_notificationsDropDown.helpers({
     num_unread: function(){
-        var read = Read.find({}).map(function(r){return r.notification_id})
-        return Notifications.find({_id:{$nin: read}}).count();
+        return Notifications.find({},{$sort:{createdAt:1}}).count();
     },
     showNum: function(){
-        var read = Read.find({}).map(function(r){return r.notification_id})
-        return Notifications.find({_id:{$nin: read}}).count() > 0;
+        return Notifications.find({}).count() > 0;
     }
 });
 
@@ -29,10 +27,10 @@ Template.kahon_notifications.events = {
         e.stopPropagation()
     },
     "click .unread":function(e,t){
+        e.stopPropagation()
         console.log(e.currentTarget.id)
         console.log("e.target.id:" +e.target.id)
-        Meteor.call("read",e.currentTarget.id)
-        e.stopPropagation()
+        Meteor.call("close",e.target.id)
     },
     "click .read":function(e,t){
         e.stopPropagation()
