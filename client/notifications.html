@@ -1,7 +1,8 @@
 <template name="kahon_notifications">
-  <ul class="dropdown-menu" role="menu">
+  <ul class="dropdown-menu">
     {{#each notifications}}
-         <li class="{{isRead _id}}" >
+         <li class="{{isRead _id}}">
+            <a href="#" style="text-align: center" class="close" id="{{_id}}">x</a>
             <a href="{{url}}">
                 <p>{{title}}</p>
                 <p>{{message}}</p>
@@ -13,8 +14,10 @@
 </template>
 
 <template name="kahon_notificationsDropDown">
-    <li class="dropdown">
-      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Notifications {{num_unread}} <span class="caret"></span></a>
+      <a href="#" class="dropdown-toggle navbar-brand" data-toggle="dropdown" role="button" aria-expanded="false">{{> iconTint}} <span class="badge" style="background-color:#E02121">{{num_unread}}</span> <span class="caret"></span></a>
       {{> kahon_notifications}}
-    </li>
+</template>
+
+<template name="iconTint">
+  <span class="glyphicon glyphicon-tint"></span>
 </template>

@@ -13,3 +13,8 @@ Read.allow({
     return userId === Meteor.userId();
   }
 });
+Destinify.allow({
+  update: function(userId,dest){
+    return userId === Meteor.userId();
+  }  
+});
