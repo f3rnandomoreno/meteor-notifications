@@ -5,7 +5,7 @@ Template.kahon_notifications.created = function(){
 
 Template.kahon_notifications.helpers({
     notifications: function(){
-        return Notifications.find({});
+        return Notifications.find({},{sort:{createdAt:-1},limit:4});
     },
     readString: function(value){
         return value===true? "read":"unread";
@@ -14,7 +14,7 @@ Template.kahon_notifications.helpers({
 
 Template.kahon_notificationsDropDown.helpers({
     num_unread: function(){
-        return Notifications.find({},{$sort:{createdAt:1}}).count();
+        return Notifications.find({}).count();
     },
     showNum: function(){
         return Notifications.find({}).count() > 0;
