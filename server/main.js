@@ -37,13 +37,13 @@ kahonNotification.create = function(users_id,title,message,url,other){
     
 }
 
-kahonNotification.hide = function(notification_id,user_id){
-    console.log("Meteor.userId:" + user_id)
-    Notifications.update({_id:notification_id},{$set:{closed:true}})
-}
 
 Meteor.methods({
-    hide: function(notification_id){
-        kahonNotification.hide(notification_id,Meteor.userId())
-    }    
+    close: function(notification_id){
+        Notifications.update({_id:notification_id},{$set:{closed:true}})
+    },
+    read: function(notification_id){
+        console.log("read:::::notification_id:" +notification_id )
+        Notifications.update({_id:notification_id},{$set:{read:true}})    
+    }
 });

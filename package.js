@@ -19,7 +19,7 @@ Package.onUse(function(api) {
   // implementation.
   api.use(['twbs:bootstrap@3.3.1', 'nemo64:bootstrap@3.3.1_1'], 'client', {weak: true});
   
-  api.addFiles(['client/notifications.html','client/notifications.js'],'client');
+  api.addFiles(['client/notifications.html','client/notifications.js','client/style.css'],'client');
   api.addFiles(['server/main.js','server/publications.js'],'server');
   api.addFiles('shared/collections.js',['server','client'])
   

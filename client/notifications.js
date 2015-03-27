@@ -7,8 +7,8 @@ Template.kahon_notifications.helpers({
     notifications: function(){
         return Notifications.find({});
     },
-    isRead: function(notification_id){
-        return Read.find({notification_id: notification_id}).count()>0 ? "read":"unread";
+    readString: function(value){
+        return value===true? "read":"unread";
     }
 });
 
@@ -16,11 +16,25 @@ Template.kahon_notificationsDropDown.helpers({
     num_unread: function(){
         var read = Read.find({}).map(function(r){return r.notification_id})
         return Notifications.find({_id:{$nin: read}}).count();
-    }    
+    },
+    showNum: function(){
+        var read = Read.find({}).map(function(r){return r.notification_id})
+        return Notifications.find({_id:{$nin: read}}).count() > 0;
+    }
 });
 
 Template.kahon_notifications.events = {
     "click .close": function(e,t){
-        Meteor.call("hide",e.target.id)
+        Meteor.call("close",e.target.id)
+        e.stopPropagation()
+    },
+    "click .unread":function(e,t){
+        console.log(e.currentTarget.id)
+        console.log("e.target.id:" +e.target.id)
+        Meteor.call("read",e.currentTarget.id)
+        e.stopPropagation()
+    },
+    "click .read":function(e,t){
+        e.stopPropagation()
     }
 }
