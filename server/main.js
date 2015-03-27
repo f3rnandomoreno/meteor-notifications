@@ -12,31 +12,34 @@ kahonNotification.create = function(users_id,title,message,url,other){
     // object to insert to database
     var notification = {}
     
-    // if destionation is [], it is for all users
-    if (users_id.length===0) {
-        notification.all = true
-    }else{
-        notification.all = false
-    }
-    
     notification.title = title
     notification.message = message
     notification.url = url
     notification.other = other
+    notification.read = false
+    notification.closed = false
     notification.createdAt = new Date()
-    Notifications.insert(notification,function(error,_id){
-        if (!error) {
-            for(var i=0;i<users_id.length;i++){
-                Destinify.insert({notification_id:_id,user_id:users_id[i],hide:false})    
-            }
+    
+    // if destionation is [], it is for all users
+    // TODO: mirar si el insert puede insertar arrays de objetos para hacer solo
+    // un acceso a base de datos
+    if (users_id.length===0) {
+        Meteor.users.find({}).forEach(function(u){
+            notification.user_id = u._id
+            Notifications.insert(notification)
+        })
+    }else{
+        for(var i=0;i<users_id.length;i++){
+            notification.user_id = users_id[i]
+            Notifications.insert(notification)
         }
-        
-    });
+    }
+    
 }
 
 kahonNotification.hide = function(notification_id,user_id){
     console.log("Meteor.userId:" + user_id)
-    Destinify.upsert({notification_id:notification_id,user_id:user_id},{notification_id:notification_id,user_id:user_id,hide:true})    
+    Notifications.update({_id:notification_id},{$set:{closed:true}})
 }
 
 Meteor.methods({

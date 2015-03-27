@@ -24,6 +24,7 @@ Package.onUse(function(api) {
   api.addFiles('shared/collections.js',['server','client'])
   
   api.imply(['templating'], 'client');
+  api.imply('accounts-base', ['client', 'server']);
   api.export('kahonNotification')
 
 });

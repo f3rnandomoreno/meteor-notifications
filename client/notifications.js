@@ -21,9 +21,6 @@ Template.kahon_notificationsDropDown.helpers({
 
 Template.kahon_notifications.events = {
     "click .close": function(e,t){
-        console.log(e)
-        console.log(t)
-        console.log(e.target.id)
         Meteor.call("hide",e.target.id)
     }
 }
