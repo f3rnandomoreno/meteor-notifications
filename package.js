@@ -14,6 +14,7 @@ Package.onUse(function(api) {
   api.versionsFrom('1.0.5');
   api.use(['standard-app-packages'], ['client','server']);
   api.use('accounts-base', 'server');
+  api.use('percolate:momentum');
   
   // Allows the user of this package to choose their own Bootstrap
   // implementation.

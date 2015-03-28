@@ -1,14 +1,20 @@
 <template name="kahon_notifications">
   <ul class="dropdown-menu">
+    {{#momentum plugin='fade'}}
     {{#each notifications}}
-         <li class="{{readString read}}"  id="{{_id}}">
-            <a href="#" style="text-align: center" class="close" id="{{_id}}">x</a>
-            <a href="{{url}}">
+         <li class="{{readString read}}" style="padding:10px"  id="{{_id}}">
+          <table>
+            <tr>
+              <td><a href="{{url}}">
                 <p>{{title}}</p>
                 <p>{{message}}</p>
-            </a>
+            </a></td>
+              <td style="padding-left: 10px"><a href="#" style="text-align: center" class="close" id="{{_id}}">x</a></td>
+            </tr>
+          </table>
         </li>
     {{/each}}
+    {{/momentum}}
   </ul>
 </template>
 

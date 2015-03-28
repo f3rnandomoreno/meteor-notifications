@@ -1,4 +1,11 @@
 kahonNotification = {}
+
+/*Auxiliar functions*/
+upsertNotification = function(notification,user_id){
+    notification.user_id = user_id
+    Notifications.insert(notification)
+}
+
 /**
 * Create a Notification.
 * @param {array} users_id - List of users that will be notified. [] value for all users.
