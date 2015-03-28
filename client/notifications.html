@@ -19,7 +19,9 @@
 </template>
 
 <template name="kahon_notificationsDropDown">
-      <a href="#" class="dropdown-toggle navbar-brand" data-toggle="dropdown" role="button" aria-expanded="false">{{> iconTint}} {{#if showNum}}<span class="badge" style="background-color:#E02121">{{num_unread}}</span>{{/if}} <span class="caret"></span></a>
+      <a href="#" class="dropdown-toggle navbar-brand" data-toggle="dropdown" role="button" aria-expanded="false">{{> iconTint}}
+      {{#if showNum}}<span class="badge" style="background-color:#E02121">{{num_unread}}</span>{{/if}}
+      </a>
       {{> kahon_notifications}}
 </template>
 
